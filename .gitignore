@@ -1,0 +1,131 @@
+# Visual Studio files and directories
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.sdf
+*.vssscc
+*.buildscc
+*.log
+*.sql
+*.opensdf
+*.VC.db
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+[Ee]xe/
+[Tt]emp/
+[Tt]mp/
+[Tt]est[Rr]esults/
+*.xap
+*.lib
+*.obj
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.idb
+*.winmd
+*.appx
+*.appxbundle
+*.pri
+*.scc
+*.vsix
+*.vsixmanifest
+*.woff
+
+# NuGet packages
+packages/
+*.nupkg
+*.nuget/
+!packages/repositories.config # Keep this file to track package sources
+
+# Rider files
+.idea/
+*.iml
+
+# Resharper files
+*.DotSettings
+*.ReSharper
+
+# StyleCop
+StyleCop.Cache
+
+# NCrunch
+NCrunch*
+
+# Visual Studio Code
+.vscode/
+
+# Local history for various IDEs
+.history/
+
+# Operating System files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Source control files (if not using Git directly)
+_svn/
+.svn/
+CVS/
+
+# Azure Web Sites files
+_service/
+hostingstart.html
+
+# Node.js (if mixed with .NET)
+node_modules/
+npm-debug.log
+
+# Mac specific files
+.localized
+
+# Unity related files (if applicable)
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+AssetStoreTools/
+UserSettings/
+Logs/
+
+# If you have specific folders for published output (e.g., for deployment)
+# For example:
+# publish/
+
+# Unwanted files
+*.bak
+*.orig
+*.swp
+*.~
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar
+*.iso
+*.dmg
+*.vhd
+*.vhdx
+
+# Certificate files
+*.pfx
+*.snk
+
+# User-specific settings that may be generated
+*.userprefs
+
+# Recommended for .NET Core projects
+# obj/
+# bin/
+
+# Visual Studio Test files
+*.trx
+TestResults/

@@ -1,12 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStoreWebApi2.Models
 {
-    public class BookContext : DbContext
+    public class BookContext : IdentityDbContext<IdentityUser>
     {
 
-    public BookContext(DbContextOptions<BookContext>options) : base(options){}
+    public BookContext(DbContextOptions<BookContext> options) : base(options)
+    {
 
+    }
     public DbSet<Book> Books{get;set;}
 
     public DbSet<Category> Categories {get;set;}
@@ -16,6 +20,8 @@ namespace BookStoreWebApi2.Models
     public DbSet<Order> Orders{get;set;}
 
     public DbSet<Payment> Payments{get;set;}
+
+    
 
     }
 }

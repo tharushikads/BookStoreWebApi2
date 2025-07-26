@@ -13,35 +13,76 @@ namespace BookStoreWebApi2.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly BookContext _context;
 
-        public CustomerController(BookContext context)
+        private readonly ICustomerService _customerService;
+        private readonly ILogger<CustomerController> _logger;
+
+        public CustomerController(ICustomerService customerService, ILogger<CustomerController> logger)
+        
         {
-            _context = context;
+            _customerService = customerService;
+            _logger = logger;
         }
 
         // GET: api/Customer
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
+        public async Task<ActionResult<IEnumerable<Customer>>> Get Customers()
         {
-            return await _context.Customers.ToListAsync();
-        }
-
-        // GET: api/Customer/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Customer>> GetCustomer(int id)
-        {
-            var customer = await _context.Customers.FindAsync(id);
-
-            if (customer == null)
-            {
-                return NotFound();
+            try
+            {logger.LogInformation("Fetching all customers.");
+                var customers = await _customerService.GetAllCustomersAsync();
+                if (customers == null || !customers.Any())
+                {
+                    _logger.LogWarning("No customers found.");
+                    return NotFound("No customers found.");
+                }
+                return Ok(customers);
             }
-
-            return customer;
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while fetching customers.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
 
-        // PUT: api/Customer/5
+        // GET: api/Customer/2
+        [HttpGet("{id}")]
+        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        {
+            try
+            {
+                if (id != customer.CustomerId)
+                {
+                    _logger.LogWarning("Customer ID mismatch.");
+                    return BadRequest("Customer ID mismatch.");
+                }
+
+                await _customerService.UpdateCustomerAsync(id, customer);
+                _logger.LogInformation($"Customer with ID {id} updated.");
+                return NoContent();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _customerService.GetCustomerByIdAsync(id) == null)
+                {
+                    _logger.LogWarning($"Customer with ID {id} not found for update.");
+                    return NotFound($"Customer with ID {id} not found.");
+                }
+                else
+                {
+                    _logger.LogError("Error updating customer.");
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while updating the customer.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
+        }
+
+
+        // PUT: api/Customer/2
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCustomer(int id, Customer customer)
@@ -72,36 +113,91 @@ namespace BookStoreWebApi2.Controllers
             return NoContent();
         }
 
-        // POST: api/Customer
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+
+         // PUT: api/Customer/2
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCustomer(int id, Customer customer)
+        {
+            try
+            {
+                if (id != customer.CustomerId)
+                {
+                    _logger.LogWarning("Customer ID mismatch.");
+                    return BadRequest("Customer ID mismatch.");
+                }
+
+                await _customerService.UpdateCustomerAsync(id, customer);
+                _logger.LogInformation($"Customer with ID {id} updated.");
+                return NoContent();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (await _customerService.GetCustomerByIdAsync(id) == null)
+                {
+                    _logger.LogWarning($"Customer with ID {id} not found for update.");
+                    return NotFound($"Customer with ID {id} not found.");
+                }
+                else
+                {
+                    _logger.LogError("Error updating customer.");
+                    throw;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while updating the customer.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
+        }
+
+
+         // POST: api/Customers
         [HttpPost]
         public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
         {
-            _context.Customers.Add(customer);
-            await _context.SaveChangesAsync();
+            try
+            {
+                if (customer == null)
+                {
+                    _logger.LogWarning("Received empty customer object.");
+                    return BadRequest("Customer data cannot be null.");
+                }
 
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+                await _customerService.AddCustomerAsync(customer);
+                _logger.LogInformation($"Customer with ID {customer.CustomerId} created.");
+                return CreatedAtAction("GetCustomer", new { id = customer.CustomerId }, customer);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating the customer.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
 
-        // DELETE: api/Customer/5
+         // DELETE: api/Customers/2
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCustomer(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            if (customer == null)
+            try
             {
-                return NotFound();
+                var customer = await _customerService.GetCustomerByIdAsync(id);
+                if (customer == null)
+                {
+                    _logger.LogWarning($"Customer with ID {id} not found.");
+                    return NotFound($"Customer with ID {id} not found.");
+                }
+
+                await _customerService.DeleteCustomerAsync(id);
+                _logger.LogInformation($"Customer with ID {id} deleted.");
+                return NoContent();
             }
-
-            _context.Customers.Remove(customer);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CustomerExists(int id)
-        {
-            return _context.Customers.Any(e => e.Id == id);
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while deleting the customer.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
+            }
         }
     }
 }
+
+
