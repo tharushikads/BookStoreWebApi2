@@ -70,7 +70,7 @@ NCrunch*
 Thumbs.db
 Desktop.ini
 
-# Source control files (if not using Git directly)
+# Source control files 
 _svn/
 .svn/
 CVS/
@@ -79,14 +79,12 @@ CVS/
 _service/
 hostingstart.html
 
-# Node.js (if mixed with .NET)
-node_modules/
-npm-debug.log
+
 
 # Mac specific files
 .localized
 
-# Unity related files (if applicable)
+# Unity related files 
 Library/
 Temp/
 Obj/
@@ -96,9 +94,7 @@ AssetStoreTools/
 UserSettings/
 Logs/
 
-# If you have specific folders for published output (e.g., for deployment)
-# For example:
-# publish/
+
 
 # Unwanted files
 *.bak
@@ -122,10 +118,10 @@ Logs/
 # User-specific settings that may be generated
 *.userprefs
 
-# Recommended for .NET Core projects
-# obj/
-# bin/
+obj/
+bin/
 
 # Visual Studio Test files
 *.trx
 TestResults/
+

@@ -34,7 +34,7 @@ SignInManager<IdentityUser> signInManager, EmailService emailService, IConfigura
  [HttpPost("register")]
  public async Task<IActionResult> Register(AuthModel model)
  {
- var user = new IdentityUser { UserName = model.Email, Email = model.Email };
+ var user = new IdentityUser { UserName = model.Username, Email = model.Email };
  var result = await _userManager.CreateAsync(user, model.Password);
  if (result.Succeeded)
  {

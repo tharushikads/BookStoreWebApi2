@@ -1,10 +1,10 @@
-using IdentityPractice.Models;
+using BookStoreWebApi2.Models;
 
-public interface IStudentService
+public interface ICustomerService
 {
-    Task<IEnumerable<Student>> GetAllStudentsAsync();
-    Task<Student> GetStudentByIdAsync(int id);
-    Task AddStudentAsync(Student student);
-    Task UpdateStudentAsync(int id, Student student);
-    Task DeleteStudentAsync(int id);
+    Task<IEnumerable<Customer>> GetAllCustomerAsync();
+    Task<Customer> GetCustomerByIdAsync(int id);
+    Task AddCustomerAsync(Customer customer);
+    Task UpdateCustomerAsync(int id, Customer customer);
+    Task DeleteCustomerAsync(int id);
 }

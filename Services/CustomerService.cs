@@ -1,44 +1,44 @@
-using IdentityPractice.Models;
+using BookStoreWebApi2.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
-public class StudentService : IStudentService
+public class CustomerService : ICustomerService
 {
-    private readonly SchoolContext _context;
+    private readonly BookContext _context;
 
-    public StudentService(SchoolContext context)
+    public CustomerService(BookContext context)
     {
         _context = context;
     }
 
-    public async Task<IEnumerable<Student>> GetAllStudentsAsync()
+    public async Task<IEnumerable<Customer>> GetAllCustomerAsync()
     {
-        return await _context.Students.ToListAsync();
+        return await _context.Customers.ToListAsync();
     }
 
-    public async Task<Student> GetStudentByIdAsync(int id)
+    public async Task<Customer> GetCustomerByIdAsync(int id)
     {
-        return await _context.Students.FindAsync(id);
+        return await _context.Customers.FindAsync(id);
     }
 
-    public async Task AddStudentAsync(Student student)
+    public async Task AddCustomerAsync(Customer customer)
     {
-        _context.Students.Add(student);
+        _context.Customers.Add(customer);
         await _context.SaveChangesAsync();
     }
 
-    public async Task UpdateStudentAsync(int id, Student student)
+    public async Task UpdateCustomerAsync(int id, Customer customer)
     {
-        _context.Entry(student).State = EntityState.Modified;
+        _context.Entry(customer).State = EntityState.Modified;
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteStudentAsync(int id)
+    public async Task DeleteCustomerAsync(int id)
     {
-        var student = await _context.Students.FindAsync(id);
-        if (student != null)
+        var customer = await _context.Customers.FindAsync(id);
+        if (customer != null)
         {
-            _context.Students.Remove(student);
+            _context.Customers.Remove(customer);
             await _context.SaveChangesAsync();
         }
     }

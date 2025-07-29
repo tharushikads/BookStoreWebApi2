@@ -1,3 +1,11 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using BookStoreWebApi2.Models;      
+
+
+
+
 namespace BookStoreWebApi2.Repositories
 {
     public class CustomerRepository

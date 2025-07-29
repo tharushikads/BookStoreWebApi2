@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
+using BookStoreWebApi2.Models;
 
 namespace BookStoreWebApi2.Models
 {
@@ -10,9 +11,9 @@ namespace BookStoreWebApi2.Models
        [Required]
        [StringLength(100, MinimumLength = 3)]
        public string Name { get; set; }
+       public string Email { get; set; }
+       public int PhoneNumber{ get;set;}
        
-       [JsonIgnore]
-       public List<Book>? Books { get; set; }
 }
 }
 
