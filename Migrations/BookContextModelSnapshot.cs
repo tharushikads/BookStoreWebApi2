@@ -24,22 +24,15 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Author")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("CustomerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("YearPublished")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
 
                     b.ToTable("Books");
                 });
@@ -51,11 +44,9 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -69,10 +60,16 @@ namespace BookStoreWebApi2.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -90,7 +87,6 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Currency")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CustomerId")
@@ -100,7 +96,6 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<decimal>("TotalAmount")
@@ -121,7 +116,6 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Currency")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("OrderId")
@@ -131,11 +125,9 @@ namespace BookStoreWebApi2.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PaymentMethod")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Status")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -335,13 +327,6 @@ namespace BookStoreWebApi2.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BookStoreWebApi2.Models.Book", b =>
-                {
-                    b.HasOne("BookStoreWebApi2.Models.Customer", null)
-                        .WithMany("Books")
-                        .HasForeignKey("CustomerId");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -391,11 +376,6 @@ namespace BookStoreWebApi2.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("BookStoreWebApi2.Models.Customer", b =>
-                {
-                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }
