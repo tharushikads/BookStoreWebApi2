@@ -10,8 +10,8 @@ namespace BookStoreWebApi2.Models
        public int Id{get;set;}
        [Required]
        [StringLength(100, MinimumLength = 3)]
-       public string Name { get; set; }
-       public string Email { get; set; }
+       public string? Name { get; set; }
+       public string? Email { get; set; }
        public int PhoneNumber{ get;set;}
        
 }

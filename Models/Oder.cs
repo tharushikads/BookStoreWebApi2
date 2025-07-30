@@ -7,9 +7,9 @@ public class Order
 {
    public int Id{get;set;}
    public int CustomerId{get;set;}
-   public string Status{get;set;}
+   public string? Status{get;set;}
    public decimal TotalAmount{get;set;}
-   public string Currency{get;set;}
+   public string? Currency{get;set;}
 
    [JsonIgnore]
    public List<int> BookIds { get; set; }
