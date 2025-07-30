@@ -20,13 +20,13 @@ public CustomersController(ICustomerService customerService, ILogger<CustomersCo
 _customerService = customerService;
 _logger = logger;
 }
-// GET: api/Students
+// GET: api/Customers
 [HttpGet]
 public async Task<ActionResult<IEnumerable<Customer>>> GetCustomers()
 {
 try
 {
-_logger.LogInformation("Fetching all students.");
+_logger.LogInformation("Fetching all customers.");
 var customers = await _customerService.GetAllCustomerAsync();
 if (customers == null || !customers.Any())
 {
@@ -41,7 +41,7 @@ _logger.LogError(ex, "An error occurred while fetching customers.");
 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
 }
 }
-// GET: api/Students/5
+// GET: api/Customers/5
 [HttpGet("{id}")]
 public async Task<ActionResult<Customer>> GetCustomers(int id)
 {
@@ -62,7 +62,7 @@ _logger.LogError(ex, "An error occurred while fetching the customer.");
 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
 }
 }
-// PUT: api/Students/5
+// PUT: api/Cusotmers/5
 [HttpPut("{id}")]
 public async Task<IActionResult> PutCustomer(int id, Customer customer)
 {
@@ -96,7 +96,7 @@ _logger.LogError(ex, "An error occurred while updating the customer.");
 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
 }
 }
-// POST: api/Students
+// POST: api/Customers
 [HttpPost]
 public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
 {
@@ -117,7 +117,7 @@ _logger.LogError(ex, "An error occurred while creating the customer.");
 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
 }
 }
-// DELETE: api/Students/5
+// DELETE: api/Customers/5
 [HttpDelete("{id}")]
 public async Task<IActionResult> DeleteCustomer(int id)
 {
