@@ -294,3 +294,4 @@
 /Users/tharushikadesilva/BookStoreWebApi2/obj/Debug/net9.0/BookStoreWebApi2.pdb
 /Users/tharushikadesilva/BookStoreWebApi2/obj/Debug/net9.0/BookStoreWebApi2.genruntimeconfig.cache
 /Users/tharushikadesilva/BookStoreWebApi2/obj/Debug/net9.0/ref/BookStoreWebApi2.dll
+/Users/tharushikadesilva/BookStoreWebApi2/bin/Debug/net9.0/dotnet-tools.json
