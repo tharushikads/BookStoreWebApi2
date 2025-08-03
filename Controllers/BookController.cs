@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookStoreWebApi2.Models;
 
-namespace BookStoreWebApi2.Co
+namespace BookStoreWebApi2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
